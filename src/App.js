@@ -1,10 +1,19 @@
 import React from 'react'
 import './App.css'
 import BookShelf from './BookShelf';
+import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends React.Component {
   state = {
     showSearchPage: false,
+    books: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({books})
+      console.log({books})
+    })
   }
 
   render() {
