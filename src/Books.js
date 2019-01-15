@@ -6,8 +6,8 @@ class Books extends Component {
     console.log(books);
     return (
       <ol className="books-grid">
-        {books.map(book =>
-            <li>
+        {books.map((book, id) => (
+            <li key={id}>
               <div className="book">
                 <div className="book-top">
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail}})` }}></div>
@@ -25,7 +25,8 @@ class Books extends Component {
                 <div className="book-authors">{book.authors}</div>
               </div>
             </li>
-          )}
+          ))
+        }
       </ol>
     )
   }
