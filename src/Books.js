@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 
 class Books extends Component {
   render() {
-    const books = this.props;
+    const books = this.props.books;
     console.log(books);
     return (
       <ol className="books-grid">
-        {this.props.books.map(book =>
+        {books.map(book =>
             <li>
               <div className="book">
                 <div className="book-top">
