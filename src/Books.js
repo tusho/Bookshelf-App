@@ -3,10 +3,12 @@ import React, {Component} from 'react';
 class Books extends Component {
   render() {
     const books = this.props.books;
-    console.log(books);
+    const shelf = this.props.shelf.toLowerCase().replace(/\s/g, '');
+    let selectedBooks = books.filter(book => shelf == book.shelf.toLowerCase())
+    console.log(selectedBooks);
     return (
       <ol className="books-grid">
-        {books.map((book, id) => (
+        {selectedBooks.map((book, id) => (
             <li key={id}>
               <div className="book">
                 <div className="book-top">
