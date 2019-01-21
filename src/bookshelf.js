@@ -8,9 +8,8 @@ class BookShelf extends Component {
   render() {
 
     console.log(this.props.title);
-    const books = this.props.books;
     const shelfValue = this.props.title.toLowerCase().replace(/\s/g, '');
-    let selectedBooks = books.filter(book => shelfValue === book.shelf.toLowerCase());
+    let selectedBooks = this.props.books.filter(book => shelfValue === book.shelf.toLowerCase());
 
     const bookList = selectedBooks.map((book) => (
       <li key={book.id}>
