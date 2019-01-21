@@ -6,21 +6,25 @@ class BookShelf extends Component {
 
 
   render() {
-        console.log(this.props.books);
 
-      const bookList = this.props.books.map((book) => (
-        <li key={book.id}>
-          <Books
-            shelf={book.shelf}
-            id={book.id}
-            title={book.title}
-            thumbnail={book.imageLinks && book.imageLinks.thumbnail}
-            authors={book.authors}
-          />
-        </li>
-      ));
+    console.log(this.props.title);
+    const books = this.props.books;
+    const shelfValue = this.props.title.toLowerCase().replace(/\s/g, '');
+    let selectedBooks = books.filter(book => shelfValue === book.shelf.toLowerCase());
 
+    const bookList = selectedBooks.map((book) => (
+      <li key={book.id}>
+        <Books
+          shelf={book.shelf}
+          id={book.id}
+          title={book.title}
+          thumbnail={book.imageLinks && book.imageLinks.thumbnail}
+          authors={book.authors}
+        />
+      </li>
+    ));
 
+    console.log({selectedBooks})
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.props.title}</h2>
