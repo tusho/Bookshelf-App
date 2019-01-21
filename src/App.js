@@ -15,6 +15,10 @@ class BooksApp extends React.Component {
     })
   }
 
+  handleEvent = (e) => {
+      alert(e.target.value)
+    };
+
 
   render() {
     return (
@@ -40,7 +44,7 @@ class BooksApp extends React.Component {
               <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-              <BookShelf title="Currently Reading" books={this.state.books}/>
+              <BookShelf title="Currently Reading" books={this.state.books} handleEvent={this.handleEvent}/>
               <BookShelf title="Want to Read" books={this.state.books}/>
               <BookShelf title="Read" books={this.state.books}/>
             </div>

@@ -3,13 +3,13 @@ import React, {Component} from 'react';
 class Books extends Component {
 
   render() {
-    const {shelf, id, title, authors, thumbnail} = this.props;
+    const {handleEvent, shelf, id, title, authors, thumbnail} = this.props;
     return (
               <div className="book">
                 <div className="book-top">
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})` }}></div>
                   <div className="book-shelf-changer">
-                    <select  value={shelf} onChange={this.props.handleEvent}>
+                    <select  value={shelf} onChange={handleEvent}>
                       <option value="move" disabled>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>

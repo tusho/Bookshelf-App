@@ -5,11 +5,8 @@ import Books from './Books';
 class BookShelf extends Component {
 
 
-  handleEvent = (e) => {
-      alert(e.target.value)
-    };
-
   render() {
+    const { books, handleEvent } = this.props
 
     return (
       <div className="bookshelf">
@@ -24,7 +21,7 @@ class BookShelf extends Component {
                   title={book.title}
                   thumbnail={book.imageLinks && book.imageLinks.thumbnail}
                   authors={book.authors}
-                  handleEvent = {this.handleEvent}
+                  handleEvent = {handleEvent}
                 />
               </li>
             ))}
