@@ -5,7 +5,9 @@ import Books from './Books';
 class BookShelf extends Component {
 
 
-
+  handleEvent = (e) => {
+      alert(e.target.value)
+    };
 
   render() {
 
@@ -22,7 +24,7 @@ class BookShelf extends Component {
                   title={book.title}
                   thumbnail={book.imageLinks && book.imageLinks.thumbnail}
                   authors={book.authors}
-                  // handleEvent = {this.handleEvent}
+                  handleEvent = {this.handleEvent}
                 />
               </li>
             ))}

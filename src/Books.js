@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 
 class Books extends Component {
 
-  handleEvent = (e) => {
-      alert('test')
-    };
-
   render() {
     const {shelf, id, title, authors, thumbnail} = this.props;
     return (
@@ -13,7 +9,7 @@ class Books extends Component {
                 <div className="book-top">
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})` }}></div>
                   <div className="book-shelf-changer">
-                    <select  value={shelf} onChange={this.handleEvent}>
+                    <select  value={shelf} onChange={this.props.handleEvent}>
                       <option value="move" disabled>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>
