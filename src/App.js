@@ -15,23 +15,20 @@ class BooksApp extends React.Component {
     })
   }
 
+  handleEvent  = (e, book) => {
+      const newShelf = e.target.value
 
-  // handleEvent = (e, book) => {
-  //     alert(e.target.value)
-  //     alert(book.target.value)
-  //   };
+      if (this.state.books) {
 
-    handleEvent  = (e, book) => {
-        const newShelf = e.target.value
+        BooksAPI.update(book, newShelf).then(() => {
 
-        if (this.state.books) {
-
-          BooksAPI.update(book, newShelf).then(() => {
-            console.log(newShelf + ' ' + ' ' + book)
-
-          })
-        }
+          book.shelf = newShelf;
+          this.setState(state => ({
+            books: state.books.filter(newBook => newBook.id !== book.id).concat([ book ])
+          }))
+        })
       }
+    }
 
 
   render() {
