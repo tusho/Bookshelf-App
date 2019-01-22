@@ -15,9 +15,24 @@ class BooksApp extends React.Component {
     })
   }
 
-  handleEvent = (e) => {
-      alert(e.target.value)
-    };
+
+  // handleEvent = (e, book) => {
+  //     alert(e.target.value)
+  //     alert(book.target.value)
+  //   };
+
+    handleEvent  = (e, book) => {
+        const newShelf = e.target.value
+
+        if (this.state.books) {
+
+          BooksAPI.update(book, newShelf).then(() => {
+            console.log(newShelf + ' ' + ' ' + book)
+
+          })
+        }
+      }
+
 
   render() {
 
@@ -49,7 +64,7 @@ class BooksApp extends React.Component {
             }
             <div className="list-books-content">
               {shelfTitles.map((shelfTitle) => (
-                <BookShelf key={shelfTitle} title={shelfTitle} books={this.state.books} handleEvent={this.handleEvent} books={this.state.books.filter(book => book.shelf.toLowerCase() === shortenText(shelfTitle))}/>
+                <BookShelf key={shelfTitle} title={shelfTitle} handleEvent={this.handleEvent} books={this.state.books.filter(book => book.shelf.toLowerCase() === shortenText(shelfTitle))}/>
               ))}
             </div>
             <div className="open-search">
