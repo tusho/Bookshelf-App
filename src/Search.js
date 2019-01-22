@@ -9,10 +9,12 @@ class Search extends Component {
   }
 
   search = (query) => {
-     // this.setState({ searchResult: query })
      console.log({ query })
-     BooksAPI.search(query).then(books => {
-         this.setState({ books })
+     BooksAPI.search(query.trim()).then(books => {
+          if(!books.error) {
+            this.setState({ books })
+            console.log({ books })
+          }
      })
   }
 
