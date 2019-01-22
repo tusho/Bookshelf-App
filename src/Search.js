@@ -9,8 +9,11 @@ class Search extends Component {
   }
 
   search = (query) => {
-     this.setState({ searchResult: query })
+     // this.setState({ searchResult: query })
      console.log({ query })
+     BooksAPI.search(query).then(books => {
+         this.setState({ books })
+     })
   }
 
 
@@ -23,6 +26,7 @@ class Search extends Component {
 
   render() {
     const {handleEvent, closeSearch} = this.props
+    const {books} = this.state;
 
     return (
       <div className="search-books">
