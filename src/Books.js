@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Books extends Component {
 
   render() {
-    const {handleEvent, book, shelf, id, title, authors, thumbnail} = this.props;
+    const {handleEvent, book, shelf, title, authors, thumbnail} = this.props;
     return (
               <div className="book">
                 <div className="book-top">
