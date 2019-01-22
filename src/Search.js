@@ -16,14 +16,6 @@ class Search extends Component {
      })
   }
 
-
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({books})
-    })
-  }
-
-
   render() {
     const {handleEvent, closeSearch} = this.props
     const {books} = this.state;
