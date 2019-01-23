@@ -53,9 +53,6 @@ class BooksApp extends React.Component {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
-            {
-
-            }
             <div className="list-books-content">
               {shelfTitles.map((shelfTitle) => (
                 <BookShelf key={shelfTitle} title={shelfTitle} handleEvent={this.handleEvent} books={this.state.books.filter(book => book.shelf.toLowerCase() === shortenText(shelfTitle))}/>
