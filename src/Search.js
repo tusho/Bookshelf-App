@@ -12,15 +12,13 @@ class Search extends Component {
   }
 
   newQuery = (query) => {
-          this.setState({ query: query.trim() })
-      }
-
+    this.setState({ query: query })
+  }
 
   search = (query) => {
-    console.log({ query })
     this.newQuery(query)
      query ? (
-       BooksAPI.search(query.trim()).then(books => {
+       BooksAPI.search(query.trim(), 10).then(books => {
             if(!books.error) {
               this.setState({ books })
               console.log({ books })
@@ -37,19 +35,20 @@ class Search extends Component {
 
     let showBooks
 
-    if (query) {
-            const match = new RegExp(escapeRegExp(query), 'i')
-            showBooks = books.filter(book => match.test(book.title))
-        } else {
-            showBooks = books
-        }
-console.log({showBooks})
+    if (query.length>=1) {
+        const match = new RegExp(escapeRegExp(query), 'i')
+        showBooks = books.filter(book => match.test(book.title))
+    } else {
+        showBooks = books
+    }
+
+    showBooks.sort(sortBy('title'))
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <a className="close-search" onClick={() => {this.props.closeSearch()}}>Close</a>
           <div className="search-books-input-wrapper">
-            {}
             <input
               type="text"
               placeholder="Search by title or author"
@@ -63,7 +62,7 @@ console.log({showBooks})
             {showBooks.map((book) => (
               <li key={book.id}>
                 <Books
-                  id={book.id}
+                  book={book}
                   title={book.title}
                   thumbnail={book.imageLinks && book.imageLinks.thumbnail}
                   authors={book.authors}

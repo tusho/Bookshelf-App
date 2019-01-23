@@ -12,7 +12,7 @@ body, .app {
 
 .list-books-title {
   padding: 10px 0;
-  background: #2e7c31;
+  background: #4863A0;
   text-align: center;
 }
 .list-books-title h1 {
@@ -48,12 +48,17 @@ body, .app {
   right: 25px;
   bottom: 25px;
 }
+
+.open-search:hover {
+  cursor: pointer;
+}
+
 .open-search a {
   display: block;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #2e7d32;
+  background: #98B3F0;
   background-image: url('./icons/add.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -97,6 +102,10 @@ body, .app {
   background-repeat: no-repeat;
   background-size: 28px;
   font-size: 0;
+}
+
+.close-search:hover {
+  cursor: pointer;
 }
 
 .search-books-results {
@@ -147,7 +156,7 @@ body, .app {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: #98B3F0;
   background-image: url('./icons/arrow-drop-down.svg');
   background-repeat: no-repeat;
   background-position: center;
