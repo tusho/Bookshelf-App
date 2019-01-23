@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import BookShelf from './BookShelf';
+import BookShelf from './bookshelf';
 import * as BooksAPI from './BooksAPI'
 import Search from './Search';
 import sortBy from 'sort-by'
