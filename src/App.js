@@ -3,6 +3,7 @@ import './App.css'
 import BookShelf from './BookShelf';
 import * as BooksAPI from './BooksAPI'
 import Search from './Search';
+import sortBy from 'sort-by'
 
 class BooksApp extends React.Component {
   state = {
@@ -40,6 +41,8 @@ class BooksApp extends React.Component {
 
     const shortenText = (value) => value.toLowerCase().replace(/\s/g, '');
     const shelfTitles = ['Currently Reading', 'Want to Read', 'Read'];
+
+    this.state.books.sort(sortBy('title'))
 
     return (
       <div className="app">
