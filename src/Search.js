@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Books from './Books';
 import * as BooksAPI from "./BooksAPI";
+import escapeRegExp from 'escape-string-regexp'
+import sortBy from 'sort-by'
 
 class Search extends Component {
 
@@ -10,7 +12,7 @@ class Search extends Component {
   }
 
   newQuery = (query) => {
-          this.setState({ query })
+          this.setState({ query: query.trim() })
       }
 
 
@@ -33,6 +35,15 @@ class Search extends Component {
     const {handleEvent, closeSearch} = this.props
     const {books, query} = this.state;
 
+    let showBooks
+
+    if (query) {
+            const match = new RegExp(escapeRegExp(query), 'i')
+            showBooks = books.filter(book => match.test(book.title))
+        } else {
+            showBooks = books
+        }
+console.log({showBooks})
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -42,18 +53,16 @@ class Search extends Component {
             <input
               type="text"
               placeholder="Search by title or author"
-              value = {query}
+              value = {this.state.query}
               onChange={(e) => this.search(e.target.value)}
             />
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.books.map((book) => (
+            {showBooks.map((book) => (
               <li key={book.id}>
                 <Books
-                  book={book}
-                  shelf={book.shelf}
                   id={book.id}
                   title={book.title}
                   thumbnail={book.imageLinks && book.imageLinks.thumbnail}
