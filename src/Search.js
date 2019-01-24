@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Books from './Books';
 import * as BooksAPI from "./BooksAPI";
-import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 import {Link} from 'react-router-dom'
 
@@ -19,10 +18,14 @@ class Search extends Component {
   search = (query) => {
     this.newQuery(query)
      query ? (
-       BooksAPI.search(query.trim(), 10).then(books => {
+       BooksAPI.search(query.trim(), 20).then(books => {
             if(!books.error) {
+              books.map((book) => (
+                this.props.booksOnShelf.filter((onshelf) => onshelf.id === book.id).map(onshelf => book.shelf = 'none')
+                )
+              )
               this.setState({ books })
-            }
+              }
        })
      ) : (
        this.setState({ books : [] })
@@ -31,18 +34,9 @@ class Search extends Component {
 
   render() {
     const {handleEvent} = this.props
-    const {books, query} = this.state;
-
-    let showBooks
-
-    if (query.length>=1) {
-        const match = new RegExp(escapeRegExp(query), 'i')
-        showBooks = books.filter(book => match.test(book.title))
-    } else {
-        showBooks = books
-    }
-
-    showBooks.sort(sortBy('title'))
+    const {books} = this.state;
+    
+    books.sort(sortBy('title'))
 
     return (
       <div className="search-books">
@@ -59,11 +53,12 @@ class Search extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {showBooks.map((book) => (
+            {books.map((book) => (
               <li key={book.id}>
                 <Books
                   book={book}
                   title={book.title}
+                  shelf={book.shelf}
                   thumbnail={book.imageLinks && book.imageLinks.thumbnail}
                   authors={book.authors}
                   handleEvent = {handleEvent}
