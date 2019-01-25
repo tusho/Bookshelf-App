@@ -1,11 +1,9 @@
 import React from 'react'
 import './App.css'
-import BookShelf from './bookshelf';
 import * as BooksAPI from './BooksAPI'
-import Search from './Search';
-import sortBy from 'sort-by'
-import {Link} from 'react-router-dom'
+import Search from './Search'
 import {Route} from 'react-router-dom'
+import Home from './Home'
 
 class BooksApp extends React.Component {
   state = {
@@ -38,31 +36,17 @@ class BooksApp extends React.Component {
     this.setState({ showSearchPage: false })
   }
 
+  openSearch = () => { 
+    this.setState({ showSearchPage: true })
+  }
+
 
   render() {
-
-    const shortenText = (value) => value.toLowerCase().replace(/\s/g, '');
-    const shelfTitles = ['Currently Reading', 'Want to Read', 'Read'];
-    this.state.books.sort(sortBy('title'))
 
     return (
       <div className="app">
             <Route exact path="/search" render={( {history} ) => (<Search closeSearch={this.closeSearch} handleEvent={this.handleEvent} booksOnShelf={this.state.books}/>)}/>
-
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              {shelfTitles.map((shelfTitle) => (
-                <Route exact path="/" key={shelfTitle} render={() => (<BookShelf title={shelfTitle} handleEvent={this.handleEvent} books={this.state.books.filter(book => book.shelf.toLowerCase() === shortenText(shelfTitle))}/>)}/>
-              ))}
-            </div>
-            <div className="open-search">
-              <Link to="/search" onClick={() => this.setState({ showSearchPage: true })}>Add a book</Link>
-            </div>
-          </div>
-        }
+            <Route exact path="/" render={() => (<Home openSearch={this.openSearch} handleEvent={this.handleEvent} books={this.state.books}/>)}/>
       </div>
     )
   }
